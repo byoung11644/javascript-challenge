@@ -14,8 +14,17 @@ tableData.forEach(function(sighting) {
 });
 
 let button = d3.select("#filter-btn");
-let inputField = d3.select("#datetime").value;
+let form = d3.select("#form");
 
-button.on("click", function() {
-    console.log(inputField);
-});
+button.on("click", runFilter);
+form.on("submit",runFilter);
+
+function runFilter() {
+    d3.event.preventDefault();
+    let inputField = d3.select("#datetime");
+    let inputValue = inputField.property("value");
+    console.log(inputValue);
+
+    let filteredData = tableData.filter(sight => sight.datetime === inputValue);
+    console.log(filteredData);
+};
