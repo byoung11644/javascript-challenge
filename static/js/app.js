@@ -1,5 +1,5 @@
 // from data.js
-var tableData = data;
+let tableData = data;
 
 // YOUR CODE HERE!
 let tbody = d3.select("tbody");
@@ -7,7 +7,6 @@ let tbody = d3.select("tbody");
 tableData.forEach(function(sighting) {
   let row = tbody.append("tr");
   Object.entries(sighting).forEach(function([key, value]) {
-      console.log(key, value);
       var cell = row.append("td");
       cell.text(value);
   });
@@ -20,11 +19,20 @@ button.on("click", runFilter);
 form.on("submit",runFilter);
 
 function runFilter() {
-    d3.event.preventDefault();
+    // d3.event.preventDefault();
     let inputField = d3.select("#datetime");
     let inputValue = inputField.property("value");
     console.log(inputValue);
 
     let filteredData = tableData.filter(sight => sight.datetime === inputValue);
     console.log(filteredData);
+    var list = d3.select("tbody");
+    list.html("");
+    filteredData.forEach(function(filteredArray) {
+      let row = tbody.append("tr");
+      Object.entries(filteredArray).forEach(function([key, value]) {
+          var cell = row.append("td");
+          cell.text(value);
+      });
+    });
 };
