@@ -39,7 +39,7 @@ function runFilter() {
 
   tbody.html("");
 
-  if (filteredData != "") {
+  if (filteredData !== "") {
 
     filteredData.forEach(function (filteredArray) {
       let row = tbody.append("tr");
