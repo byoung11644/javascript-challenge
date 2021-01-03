@@ -20,15 +20,26 @@ form.on("submit", runFilter);
 
 function runFilter() {
   d3.event.preventDefault();
-  let inputField = d3.select("#datetime");
-  let inputValue = inputField.property("value");
+  let filteredData = [];
+  for (var i = 0; i < tableData.length; i++) {
+    if (
+      (document.getElementById("datetime").value == '' || tableData[i].datetime == document.getElementById("datetime").value) &&
+      (document.getElementById("city").value == '' || tableData[i].city == document.getElementById("city").value) &&
+      (document.getElementById("state").value == '' || tableData[i].state == document.getElementById("state").value) &&
+      (document.getElementById("country").value == '' || tableData[i].country == document.getElementById("country").value) &&
+      (document.getElementById("shape").value == '' || tableData[i].shape == document.getElementById("shape").value)
+    ) {
+
+      console.log(tableData[i]);
+      filteredData.push(tableData[i]);
+    }
+  };
+
+
+
   tbody.html("");
 
-  if (inputValue !== "") {
-    console.log(inputValue);
-
-    let filteredData = tableData.filter(sight => sight.datetime === inputValue);
-    console.log(filteredData);
+  if (filteredData != "") {
 
     filteredData.forEach(function (filteredArray) {
       let row = tbody.append("tr");
